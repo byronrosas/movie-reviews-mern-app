@@ -5,6 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import authRouter from './routes/auth.route';
 dotenv.config();
 
 
@@ -48,7 +49,8 @@ app.use(express.urlencoded({ limit:"1MB", extended: false }));
 app.use(cookieParser());
 
 
-// TODO routes
+// routes
+app.use('/API/auth', authRouter);
 
 
 
