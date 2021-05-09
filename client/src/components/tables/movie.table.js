@@ -9,7 +9,8 @@ function MovieTable(props) {
     useEffect(async ()=>{
         let moviesData = await getMovies();        
         if(moviesData){
-            setData(moviesData.result.movies);
+            if(moviesData.result)
+                setData(moviesData.result.movies);
         }        
     },[]);
 
