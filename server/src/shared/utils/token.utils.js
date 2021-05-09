@@ -5,7 +5,7 @@ async function signToken(userId){
     const options = {
         expiresIn:"24h",
         issuer:process.env.DOMAIN,
-        audience:userId
+        audience:userId.toString()
     }
 
     const payload = {};

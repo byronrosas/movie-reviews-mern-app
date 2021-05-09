@@ -1,6 +1,6 @@
 import Router from 'express';
-import UserRepository from '../../shared/repositories/user.repository';
 import * as AuthController from '../controllers/auth';
+import UserRepository from '../shared/repositories/user.repository';
 const router = Router();
 let userRepository = new UserRepository();
 

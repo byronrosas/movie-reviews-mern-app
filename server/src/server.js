@@ -6,6 +6,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.route';
+import movieRouter from './routes/movie.route'
+import reviewRouter from './routes/review.route'
 dotenv.config();
 
 
@@ -51,6 +53,8 @@ app.use(cookieParser());
 
 // routes
 app.use('/API/auth', authRouter);
+app.use('/API/movie', movieRouter);
+app.use('/API/review', reviewRouter);
 
 
 

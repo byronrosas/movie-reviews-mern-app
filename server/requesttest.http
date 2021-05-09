@@ -1,0 +1,60 @@
+@baseURL = http://127.0.0.1:3001/API
+
+
+# @name login
+POST {{baseURL}}/auth/login
+content-type: application/json
+
+{
+    "email":"byron@test.com",
+    "password":"123456"
+}
+
+###
+
+@authToken = {{login.response.body.token}}
+
+POST {{baseURL}}/auth/register
+content-type: application/json
+
+{
+    "email":"byron@test.com",
+    "password":"123456",
+    "firstname":"Byron",
+    "lastname":"Rosas"
+}
+
+###
+
+POST {{baseURL}}/movie/add
+content-type: application/json
+Authorization: bearer {{authToken}}
+
+{
+    "title":"Avengers End game",
+    "rating":1,    
+    "review":"my first review"
+}
+
+###
+
+POST {{baseURL}}/review/add
+content-type: application/json
+Authorization: bearer {{authToken}}
+
+{
+    "movie":"6096c754a16b3f7842b9ff23",
+    "rating":8,    
+    "review":"my second review"
+}
+
+###
+
+GET {{baseURL}}/movie/list-rating/0
+content-type: application/json
+Authorization: bearer {{authToken}}
+
+###
+GET {{baseURL}}/review/list/0/6096c754a16b3f7842b9ff23
+content-type: application/json
+Authorization: bearer {{authToken}}
