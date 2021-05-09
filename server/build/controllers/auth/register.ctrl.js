@@ -74,6 +74,7 @@ function RegisterCtrl(userPersistence) {
             case 9:
               token = _context.sent;
               res.json({
+                _id: user._id,
                 token: token,
                 fistname: user.firstname,
                 lastname: user.lastname

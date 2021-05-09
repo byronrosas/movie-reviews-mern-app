@@ -11,9 +11,9 @@ exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
-var _user = _interopRequireDefault(require("../../shared/repositories/user.repository"));
-
 var AuthController = _interopRequireWildcard(require("../controllers/auth"));
+
+var _user = _interopRequireDefault(require("../shared/repositories/user.repository"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 

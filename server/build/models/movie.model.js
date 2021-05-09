@@ -23,6 +23,6 @@ var MovieSchema = new _mongoose.Schema({
   versionKey: false
 });
 
-var _default = model('Movie', MovieSchema);
+var _default = (0, _mongoose.model)('Movie', MovieSchema);
 
 exports["default"] = _default;

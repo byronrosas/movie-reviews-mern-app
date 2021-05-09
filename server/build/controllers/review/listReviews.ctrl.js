@@ -15,12 +15,10 @@ var _httpErrors = _interopRequireDefault(require("http-errors"));
 
 var _models = require("../../models");
 
-var _user = require("../../models/validation/user.validation");
+var _review = require("../../models/validation/review.validation");
 
-var _token = require("../../shared/utils/token.utils");
-
-// login controller
-function LoginCtrl(userPersistence) {
+//list controller
+function ListReviewsCtrl(reviewPersistence, moviePersistence) {
   // validate fields
   function isValid(_x) {
     return _isValid.apply(this, arguments);
@@ -34,7 +32,7 @@ function LoginCtrl(userPersistence) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _user.authValidation.validateAsync(body);
+              return _review.reviewListParamsValidation.validateAsync(body);
 
             case 2:
               result = _context2.sent;
@@ -52,74 +50,61 @@ function LoginCtrl(userPersistence) {
 
   return /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res, next) {
-      var valuesResult, email, password, user, matchPass, token;
+      var limit, valuesResult, page, movie, movieFound, reviews;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              _context.next = 3;
-              return isValid(req.body);
+              limit = 10; // validate
 
-            case 3:
+              _context.next = 4;
+              return isValid(req.params);
+
+            case 4:
               valuesResult = _context.sent;
-              email = valuesResult.email, password = valuesResult.password; // query user by email
+              page = valuesResult.page, movie = valuesResult.movie; // verify movie exists            
 
-              _context.next = 7;
-              return userPersistence.getByEmail(email);
+              _context.next = 8;
+              return moviePersistence.getById(movie);
 
-            case 7:
-              user = _context.sent;
+            case 8:
+              movieFound = _context.sent;
 
-              if (user) {
-                _context.next = 10;
+              if (movieFound) {
+                _context.next = 11;
                 break;
               }
 
-              throw _httpErrors["default"].NotFound("User by email not found");
+              throw _httpErrors["default"].NotFound("Movie not found");
 
-            case 10:
-              _context.next = 12;
-              return _models.userModel.compareData(password, user.password);
+            case 11:
+              _context.next = 13;
+              return reviewPersistence.listByMovie(movie, page, limit);
 
-            case 12:
-              matchPass = _context.sent;
-
-              if (matchPass) {
-                _context.next = 15;
-                break;
-              }
-
-              throw _httpErrors["default"].NotFound("Password and email do not correct");
-
-            case 15:
-              _context.next = 17;
-              return (0, _token.signToken)(user._id);
-
-            case 17:
-              token = _context.sent;
+            case 13:
+              reviews = _context.sent;
               res.json({
-                _id: user._id,
-                token: token,
-                fistname: user.firstname,
-                lastname: user.lastname
+                page: page,
+                limit: limit,
+                reviews: reviews
               });
-              _context.next = 26;
+              _context.next = 22;
               break;
 
-            case 21:
-              _context.prev = 21;
+            case 17:
+              _context.prev = 17;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0.message);
               if (_context.t0.isJoi === true) _context.t0.status = 422;
               next(_context.t0);
 
-            case 26:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 21]]);
+      }, _callee, null, [[0, 17]]);
     }));
 
     return function (_x2, _x3, _x4) {
@@ -128,5 +113,5 @@ function LoginCtrl(userPersistence) {
   }();
 }
 
-var _default = LoginCtrl;
+var _default = ListReviewsCtrl;
 exports["default"] = _default;

@@ -10,7 +10,7 @@ require("./providers/mongo.provider");
 
 var _server2 = require("./shared/utils/server.utils");
 
-var port = normalizePort(process.env.PORT || '3001');
+var port = process.env.PORT || '3001';
 
 _server["default"].set('port', port);
 

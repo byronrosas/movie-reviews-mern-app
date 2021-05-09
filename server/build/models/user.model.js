@@ -146,6 +146,6 @@ UserSchema.pre('validate', /*#__PURE__*/function () {
   };
 }());
 
-var _default = model('User', UserSchema);
+var _default = (0, _mongoose.model)('User', UserSchema);
 
 exports["default"] = _default;

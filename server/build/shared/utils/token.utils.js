@@ -29,7 +29,7 @@ function _signToken() {
             options = {
               expiresIn: "24h",
               issuer: process.env.DOMAIN,
-              audience: userId
+              audience: userId.toString()
             };
             payload = {}; // sign token with payload and options
 

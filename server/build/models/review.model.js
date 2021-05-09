@@ -35,6 +35,6 @@ var ReviewSchema = new _mongoose.Schema({
   versionKey: false
 });
 
-var _default = model('Review', ReviewSchema);
+var _default = (0, _mongoose.model)('Review', ReviewSchema);
 
 exports["default"] = _default;

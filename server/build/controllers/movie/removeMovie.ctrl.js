@@ -15,12 +15,10 @@ var _httpErrors = _interopRequireDefault(require("http-errors"));
 
 var _models = require("../../models");
 
-var _user = require("../../models/validation/user.validation");
+var _movie = require("../../models/validation/movie.validation");
 
-var _token = require("../../shared/utils/token.utils");
-
-// login controller
-function LoginCtrl(userPersistence) {
+//remove controller
+function RemoveMovieCtrl(moviePersistence, reviewPersistence) {
   // validate fields
   function isValid(_x) {
     return _isValid.apply(this, arguments);
@@ -34,7 +32,7 @@ function LoginCtrl(userPersistence) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _user.authValidation.validateAsync(body);
+              return _movie.id.validateAsync(body);
 
             case 2:
               result = _context2.sent;
@@ -52,74 +50,81 @@ function LoginCtrl(userPersistence) {
 
   return /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res, next) {
-      var valuesResult, email, password, user, matchPass, token;
+      var session, valuesResult, _id, movieFound, result, resultReview;
+
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return isValid(req.body);
+              _context.next = 2;
+              return _models.movieModel.startSession();
 
-            case 3:
-              valuesResult = _context.sent;
-              email = valuesResult.email, password = valuesResult.password; // query user by email
-
+            case 2:
+              session = _context.sent;
+              session.startTransaction();
+              _context.prev = 4;
               _context.next = 7;
-              return userPersistence.getByEmail(email);
+              return isValid(req.params);
 
             case 7:
-              user = _context.sent;
+              valuesResult = _context.sent;
+              _id = valuesResult.id; // verify review exists            
 
-              if (user) {
-                _context.next = 10;
+              _context.next = 11;
+              return moviePersistence.getById(_id);
+
+            case 11:
+              movieFound = _context.sent;
+
+              if (movieFound) {
+                _context.next = 14;
                 break;
               }
 
-              throw _httpErrors["default"].NotFound("User by email not found");
+              throw _httpErrors["default"].NotFound("Review not found");
 
-            case 10:
-              _context.next = 12;
-              return _models.userModel.compareData(password, user.password);
+            case 14:
+              _context.next = 16;
+              return moviePersistence.remove(_id);
 
-            case 12:
-              matchPass = _context.sent;
+            case 16:
+              result = _context.sent;
+              _context.next = 19;
+              return reviewPersistence.removeByMovie(movieFound._id);
 
-              if (matchPass) {
-                _context.next = 15;
-                break;
-              }
+            case 19:
+              resultReview = _context.sent;
+              console.log(result); // commit
 
-              throw _httpErrors["default"].NotFound("Password and email do not correct");
+              _context.next = 23;
+              return session.commitTransaction();
 
-            case 15:
-              _context.next = 17;
-              return (0, _token.signToken)(user._id);
-
-            case 17:
-              token = _context.sent;
+            case 23:
+              session.endSession();
               res.json({
-                _id: user._id,
-                token: token,
-                fistname: user.firstname,
-                lastname: user.lastname
+                message: 'removed'
               });
-              _context.next = 26;
+              _context.next = 35;
               break;
 
-            case 21:
-              _context.prev = 21;
-              _context.t0 = _context["catch"](0);
+            case 27:
+              _context.prev = 27;
+              _context.t0 = _context["catch"](4);
+              _context.next = 31;
+              return session.abortTransaction();
+
+            case 31:
+              session.endSession();
               console.log(_context.t0.message);
               if (_context.t0.isJoi === true) _context.t0.status = 422;
               next(_context.t0);
 
-            case 26:
+            case 35:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 21]]);
+      }, _callee, null, [[4, 27]]);
     }));
 
     return function (_x2, _x3, _x4) {
@@ -128,5 +133,5 @@ function LoginCtrl(userPersistence) {
   }();
 }
 
-var _default = LoginCtrl;
+var _default = RemoveMovieCtrl;
 exports["default"] = _default;

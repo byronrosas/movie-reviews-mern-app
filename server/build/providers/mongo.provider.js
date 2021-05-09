@@ -8,7 +8,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-_mongoose["default"].connect("mongodb://localhost:27017/movierev", {
+_mongoose["default"].connect(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
