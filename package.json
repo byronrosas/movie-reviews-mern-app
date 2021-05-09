@@ -2,8 +2,9 @@
     "name": "server",
     "version": "1.0.0",
     "description": "Server for Moview Review app",
+    
     "scripts": {
-        "heroku-postbuild": "cd ../client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+        "heroku-postbuild": "cd ./client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
         "build": "babel src --out-dir build",
         "start": "node build/",
         "dev": "nodemon ./src/ --exec babel-node --out-dir build"

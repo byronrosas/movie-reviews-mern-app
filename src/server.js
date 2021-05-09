@@ -52,7 +52,7 @@ app.use(helmet());
 app.use(function (req, res, next) {
   res.setHeader(
     'Content-Security-Policy-Report-Only',
-    "default-src 'self'; font-src 'self'; img-src 'self' https://images.unsplash.com; script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css; frame-src 'self'"
+    "default-src 'self'; font-src 'self';  script-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css; frame-src 'self'"
   );
   next();
 });
@@ -62,11 +62,11 @@ app.use(cookieParser());
 
 if (process.env.ENV === 'production') {
     // Serve any static files
-    app.use(express.static(path.join(__dirname, '../../client/build')));
+    app.use(express.static(path.join(__dirname, '../client/build')));
   // Handle React routing, return all requests to React app
     app.get('*', function(req, res) {
         console.log("running production");
-      res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
     });
   }
 
