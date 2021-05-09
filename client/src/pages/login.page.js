@@ -21,9 +21,13 @@ function LoginPage(props) {
   }
   );
   if(!isLogin) return(
-    <div className="App">
-        <LoginForm /> 
-        <RegisterForm/>       
+    <div className="d-flex">      
+        <div>
+          <LoginForm className="border-2 p-2"/> 
+        </div>
+        <div className="border-2 p-2">
+          <RegisterForm/>       
+        </div>        
     </div>
   );
   return (
