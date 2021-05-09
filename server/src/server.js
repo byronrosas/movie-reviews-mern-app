@@ -47,7 +47,7 @@ var corsOptionsFunction = (req,callback)=>{
 app.use(cors(corsOptionsFunction));
 
 
-// app.use(helmet());
+app.use(helmet());
 
 app.use(function (req, res, next) {
   res.setHeader(
