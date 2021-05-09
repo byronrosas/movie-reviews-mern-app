@@ -5,7 +5,7 @@ function MovieFormUI(props) {
     const { submitEv, cancel, onChangeEv, data } = props;
 
     return (
-        <div className="login-form">            
+        <div className="d-flex justify-content-center mt-2">            
             <form onSubmit={submitEv}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Movie title:</label>

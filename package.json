@@ -2,7 +2,7 @@
     "name": "server",
     "version": "1.0.0",
     "description": "Server for Moview Review app",
-    
+    "main":"npm start",
     "scripts": {
         "heroku-postbuild": "cd ./client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
         "build": "babel src --out-dir build",

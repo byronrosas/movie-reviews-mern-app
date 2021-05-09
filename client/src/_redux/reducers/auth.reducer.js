@@ -14,7 +14,7 @@ export function userLoginReducer(state = defaultStateUserLoginReducer, action){
         case USER_ACTIONS.ADD_USER_LOGIN:
             console.log("add user");
             //set on redux state
-            return setToLogin(action._id,action.fistname,action.lastname,action.token,action.isLogin);        
+            return setToLogin(action._id,action.firstname,action.lastname,action.token,action.isLogin);        
         case USER_ACTIONS.REMOVE_USER_LOGIN:
             //remove on redux state
             return defaultStateUserLoginReducer;

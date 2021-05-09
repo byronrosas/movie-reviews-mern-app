@@ -20,8 +20,8 @@ function MainContainer(props) {
           (connectProps)=>(            
             <div> 
                 <HeaderUI>
-                    <div>
-                        <div>
+                    <div className="p-4 border border-4 m-2">
+                        <div class="d-flex justify-content-between">
                             <h3><>{title} {connectProps.selectedMovie.title ? connectProps.selectedMovie.title : ''}</></h3>
                             
                             {

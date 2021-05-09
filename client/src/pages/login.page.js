@@ -21,11 +21,11 @@ function LoginPage(props) {
   }
   );
   if(!isLogin) return(
-    <div className="d-flex">      
-        <div>
-          <LoginForm className="border-2 p-2"/> 
+    <div className="d-flex justify-content-around mt-4">      
+        <div className="border border-primary p-2 mt-2">
+          <LoginForm /> 
         </div>
-        <div className="border-2 p-2">
+        <div className="border border-primary p-2 mt-2">
           <RegisterForm/>       
         </div>        
     </div>

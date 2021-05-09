@@ -5,7 +5,7 @@ export const addUserLogin = ({_id,firstname, lastname, token})=>({
     firstname,
     lastname,
     token,
-    _id
+    _id,
     isLogin:true
 });
 

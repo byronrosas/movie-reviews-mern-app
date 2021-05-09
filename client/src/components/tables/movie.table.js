@@ -15,7 +15,7 @@ function MovieTable(props) {
     },[]);
 
     async function getMovies(){
-        let moviesData = await connect.getMoviesAPI(page==undefined ? page : 0);                                        
+        let moviesData = await connect.getMoviesAPI(page);                                        
         return moviesData;
     }
 

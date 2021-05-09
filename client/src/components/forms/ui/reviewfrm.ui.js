@@ -5,7 +5,7 @@ function ReviewFormUI(props) {
     const { submitEv, cancel, onChangeEv, data } = props;
 
     return (
-        <div className="login-form">            
+        <div className="d-flex justify-content-center mt-2">            
             <form onSubmit={submitEv}>                
 
                 <div className="mb-3">

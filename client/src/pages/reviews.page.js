@@ -21,6 +21,13 @@ function ReviewsPage() {
     setPage(page+1); 
   }
 
+    // less data
+  function less(){  
+    if(page>0){
+      setPage(page-1); 
+    }        
+  }
+
 
 
 
@@ -41,8 +48,11 @@ function ReviewsPage() {
                   <>
                     { status.status ? status.status!=200 ? (<AlertUI title={status.status} data={status.message} type={'danger'}/>) : ('') : ('')}
                     <ReviewsTable connect={reduxConnectProps} page={page} id={id}/>
-                    <button type="button" onClick={more}>Show more</button>
-                    <button type="button" onClick={async ()=>{                      
+                    <button type="button" className="btn btn-primary" onClick={less}>-</button>
+                    - {page} -
+                    <button type="button" className="btn btn-primary" onClick={more}>+</button>                    
+                    |
+                    <button type="button" className="btn btn-danger ml-4" onClick={async ()=>{                      
                        let result = await reduxConnectProps.removeMovieAPI(id);
                        console.log("RESULT REMOVE",result);
                        if(result._id) history.replace('/movies');
