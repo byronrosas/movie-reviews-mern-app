@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
 
-mongoose.connect("mongodb://localhost:27017/movierev",
+mongoose.connect(process.env.DB,
     {
         useNewUrlParser:true,
         useUnifiedTopology:true,

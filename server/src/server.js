@@ -50,6 +50,14 @@ app.use(express.json({limit:"1MB"}));
 app.use(express.urlencoded({ limit:"1MB", extended: false }));
 app.use(cookieParser());
 
+if (process.env.ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, '../client/build')));
+  // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+  }
 
 // routes
 app.use('/API/auth', authRouter);
