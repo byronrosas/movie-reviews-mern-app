@@ -13,7 +13,7 @@ content-type: application/json
 
 ###
 
-POST http://moviemern-app.herokuapp.com/auth/login
+POST https://moviemern-app.herokuapp.com/auth/login
 content-type: application/json
 
 {
