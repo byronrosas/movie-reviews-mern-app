@@ -10,6 +10,17 @@ content-type: application/json
     "password":"123456"
 }
 
+
+###
+
+POST http://moviemern-app.herokuapp.com/auth/login
+content-type: application/json
+
+{
+    "email":"byron@test.com",
+    "password":"123456"
+}
+
 ###
 
 @authToken = {{login.response.body.token}}
