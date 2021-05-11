@@ -13,27 +13,17 @@ import MainContainer from './components/box/main.container';
 import ButtonAddMovie from './components/box/buttonAddMovie';
 import AddReviewPage from './pages/addReview.page';
 import ReviewsPage from './pages/reviews.page';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    document.title = "mern-movies";   }, []);
   return (
     <Provider context={memoryContext} store={storeMemory}> 
-    <Provider context={localContext} store={store}>        
-    {/* <Switch>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/" component={WanderPage} />
-        </Switch> */}
+    <Provider context={localContext} store={store}>            
  
     <Router>
-      <div>            
-        {/* <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>              
-        </ul> */}
+      <div>                    
         <Switch>              
           <Route path="/public">
             <div>Hola publico</div>
