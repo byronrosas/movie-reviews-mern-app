@@ -13,7 +13,7 @@ function ListMovieWithRatingCtrl(moviePersistence){
     return async (req,res,next)=>{        
 
         try {            
-
+            console.log("dev",req.params);
             const limit = 10;
             
             // validate

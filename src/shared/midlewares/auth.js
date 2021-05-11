@@ -20,6 +20,7 @@ async function isAuth(req,res,next){
     try {
         // decoded token
         const tokenDecoded = await verifyToken(token);
+        console.log(tokenDecoded);
         const idUser = tokenDecoded.aud;
         // verify user exists
         const user = await userRepository.getById(idUser);
@@ -31,6 +32,7 @@ async function isAuth(req,res,next){
         next();
         
     } catch (error) {
+        console.log(error);
         if(error.name === 'JsonWebTokenError'){
             return next(createError.Unauthorized());
         }

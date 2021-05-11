@@ -24,7 +24,7 @@ function RegisterCtrl(userPersistence){
             // generate token            
             const token = await signToken(user._id);
 
-            res.json({_id:user._id,token:token,fistname:user.firstname,lastname:user.lastname});
+            res.json({_id:user._id,token:token,firstname:user.firstname,lastname:user.lastname});
 
         } catch (error) {
             console.log(error.message);

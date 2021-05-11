@@ -45,6 +45,7 @@ export default class MovieRepository {
             ]
         ]);
 
+        console.log("movies-result",result);
 
         return result;
 
