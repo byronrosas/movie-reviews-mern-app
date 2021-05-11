@@ -8,7 +8,7 @@ function ReviewsTable(props) {
     const idUser = dataStorage ? dataStorage.userLoginReducer._id ? dataStorage.userLoginReducer._id : ''  :  '';
     let history = useHistory();
     const { connect, page, id } = props;
-    let [data,setData] = useState([]);      
+    let [data,setData] = useState(null);      
     useEffect(async ()=>{
         let reviewsData = await getReviews();        
         if(reviewsData){
@@ -31,10 +31,7 @@ function ReviewsTable(props) {
         
         if(result._id) {
             let newData = data;
-            console.log("newData",newData);
-            console.log(index);
-            newData.splice(index,1);
-            console.log("dataReplace",newData);
+            newData.splice(index,1);            
             setData([...newData]);
         }
     }
@@ -52,7 +49,7 @@ function ReviewsTable(props) {
             </thead>
             <tbody>
             {
-               data ? data.map((review,index)=>(
+               data ? data.length!=0 ? data.map((review, index)=>(
                 
                 <tr key={review._id}>                                                
                 <td>
@@ -73,13 +70,13 @@ function ReviewsTable(props) {
                 </td>
                 </tr> 
                 
-               )) : ('not reviews')
+                )) : (<div>Not reviews</div>) : (<h2>Loading ...</h2>)
             }
                
             </tbody>
             </table>           
-       </div>
-    )
+       </div> 
+    )    
 }
 
 export default ReviewsTable;

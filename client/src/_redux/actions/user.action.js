@@ -9,7 +9,7 @@ export const USER_ACTIONS = {
 export const loginAPI = (email,password) => async (dispatch) => {
     try {
       const {data} = await api.login(email,password);
-      console.log("TOKEN", data);
+      
       dispatch({ 
             type: USER_ACTIONS.ADD_USER_LOGIN,            
             _id:data._id,
@@ -43,7 +43,7 @@ export const loginAPI = (email,password) => async (dispatch) => {
 export const registerAPI = (user) => async (dispatch) => {
     try {
       const {data} = await api.register(user);
-      console.log("TOKEN", data);
+      
       dispatch({ 
             type: USER_ACTIONS.ADD_USER_LOGIN,            
             _id:data._id,

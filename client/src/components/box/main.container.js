@@ -7,8 +7,7 @@ function MainContainer(props) {
 
     return (
         <ContainerRedux
-        mapStateToProps={(store)=>{
-            console.log(store);      
+        mapStateToProps={(store)=>{                 
           return({
             selectedMovie:store.movieReducer
         })}}

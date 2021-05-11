@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // table for list movie
 function MovieTable(props) {
     const { connect, page } = props;
-    let [data,setData] = useState([]); 
+    let [data,setData] = useState(null); 
          
     useEffect(async ()=>{
         let moviesData = await getMovies();        
@@ -21,7 +21,7 @@ function MovieTable(props) {
 
     return (
                   
-        <div>                          
+        <div>                 
            <table className="table">
             <thead className="thead-dark">
                 <tr>                
@@ -32,7 +32,7 @@ function MovieTable(props) {
             </thead>
             <tbody>
             {
-               data ? data.map((movie)=>(
+               data ? data.length!=0 ? data.map((movie)=>(
                 
                 <tr key={movie._id}>                
                 <td>{movie.title}</td>
@@ -52,7 +52,7 @@ function MovieTable(props) {
                 </td>
                 </tr> 
                 
-               )) : ('not movies')
+               )) : (<div>Not found</div>) : (<h2>Loading ...</h2>)
             }
                
             </tbody>

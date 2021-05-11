@@ -29,6 +29,9 @@ function ReviewsPage() {
   }
 
 
+  const cancel = () =>{
+    history.replace('/movies');
+  }
 
 
   return (
@@ -54,7 +57,7 @@ function ReviewsPage() {
                     |
                     <button type="button" className="btn btn-danger ml-4" onClick={async ()=>{                      
                        let result = await reduxConnectProps.removeMovieAPI(id);
-                       console.log("RESULT REMOVE",result);
+                       
                        if(result._id) history.replace('/movies');
 
                        if(result.status) setStatus({
@@ -62,6 +65,8 @@ function ReviewsPage() {
                           message:result.error
                         });                       
                     }}>Delete movie</button>
+                    |
+                    <button type="button" className="btn btn-primary"onClick={cancel}>Back</button>
                   </>
                 )                              
             }   

@@ -31,11 +31,14 @@ function DashboardPage() {
           context={{ context: memoryContext }}
           >
             {
-              (reduxConnectProps)=>(
+              (reduxConnectProps)=>{
+                reduxConnectProps.selectMovie({})
+                return (
                   <>
                     <MovieTable connect={reduxConnectProps} page={page}/>
                   </>
                 )                              
+              }
             }   
           </ContainerRedux>          
           <button type="button" className="btn btn-primary" onClick={less}>-</button>
